@@ -1,0 +1,3 @@
+## Notes:
+
+* server/server.js currently has user session set up. if not needed, remove
