@@ -39,6 +39,11 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.(scss|css)$/,
                 use: [
                     {
@@ -60,7 +65,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx"],
+        extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {

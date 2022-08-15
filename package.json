@@ -4,6 +4,10 @@
   "main": "server/server.js",
   "private": true,
   "dependencies": {
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.7.3",
+    "@types/react": "^17.0.48",
+    "@types/react-dom": "^18.0.6",
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.1",
@@ -29,13 +33,15 @@
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
     "stream": "^0.0.2",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
     "uuid": "^8.3.2"
   },
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5000",
     "start": "nodemon",
     "build": "webpack",
-    "test": "react-scripts test",
+    "test": "mocha --require babel-polyfill",
     "eject": "react-scripts eject"
   },
   "browserslist": {

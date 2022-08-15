@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "../utilities.css";
 import "./App.css";
 
+import GamePage from "./pages/GamePage";
 import NotFound from "./pages/NotFound";
 
 import { get, post, isEmpty } from "../utilities";
@@ -11,8 +12,14 @@ import { get, post, isEmpty } from "../utilities";
 function App() {
 
     return (
-        <div className="root-page-container">
-            <p>Hello!</p>
+        <div className="root-page-container">            <Router>
+            <Routes>
+                <Route path="/" element={<GamePage />} />
+                <Route path="/*" element={<NotFound />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </Router>
+
         </div>
     );
 }
