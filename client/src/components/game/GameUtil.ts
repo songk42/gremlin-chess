@@ -1,3 +1,7 @@
+/**
+ * Axis along which pieces are being moved.
+ * @enum {number}
+ */
 export enum Axis {
     Row,
     Col
@@ -10,30 +14,57 @@ export interface Move {
     time?: number
 }
 
-export interface Square {
-    color: Color
+/**
+ * Indicates whether a square is occupied by a piece, and the piece itself.
+ * @class
+ * @property {boolean} occupied
+ * @property {Piece} piece
+ */
+export class PieceContainer {
     occupied: boolean
     piece?: Piece
+
+    constructor(occupied: boolean, piece?: Piece) {
+        this.occupied = occupied
+        if (typeof piece !== 'undefined') {
+            this.piece = piece
+        }
+    }
 }
 
-export interface Piece {
+/**
+ * Class of chess pieces.
+ * @class
+ * @property {PieceType} type
+ * @property {Color} color
+ */
+export class Piece {
     type: PieceType
     color: Color
+
+    constructor(type: PieceType, color: Color) {
+        this.type = type
+        this.color = color
+    }
 }
 
-export function makePiece(type: PieceType, color: Color):Piece {
-    return {type: type, color: color};
-}
-
+/**
+ * Enum of chess piece types.
+ * @enum {string}
+ */
 export enum PieceType {
-    Pawn,
-    Knight,
-    Bishop,
-    Rook,
-    Queen,
-    King
+    Pawn = "P", // ♟
+    Knight = "N", // ♞
+    Bishop = "B", // ♝
+    Rook = "R", // ♜
+    Queen = "Q", // ♛
+    King = "K" // ♚
 }
 
+/**
+ * Enum of colors (white and black), used by both squares and pieces.
+ * @enum {number}
+ */
 export enum Color {
     White,
     Black

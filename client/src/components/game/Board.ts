@@ -1,30 +1,31 @@
-import { Axis, Move, Square, Piece, PieceType, Color, makePiece } from "./GameUtil";
+import { Axis, Move, PieceContainer, Piece, PieceType, Color } from "./GameUtil"
 
 /**
  * Logical representation of a chess board.
+ * @class
+ * @property {PieceContainer} grid
  */
 export class Board {
-    grid: Square[][]
+    grid: PieceContainer[][]
 
     constructor() {
         this.grid = []
-        for (let i = 0; i < 8; i++) {
-            this.grid.push([]);
-            for (let j = 0; j < 8; j++) {
-                this.grid[i].push({
-                    color: (i + j + 1) % 2,
-                    occupied: i in [0, 1, 6, 7]
-                    // When first set up, the first two (white) and last two (black) rows contain pieces.
-                });
+        // Fill grid with empty PieceContainers.
+        for (let row = 0; row < 8; row++) {
+            this.grid.push([])
+            for (let col = 0; col < 8; col++) {
+                // When first set up, the first two (white) and last two (black) rows contain pieces.
+                this.grid[row].push(new PieceContainer(row in [0, 1, 6, 7]))
             }
         }
-        this.resetGrid();
+        this.resetGrid()
     }
 
     /**
      * Resets the chess board to its initial state.
      */
     resetGrid() {
+        // Layout of the first row; this is the same for both players.
         const firstRow = [
             PieceType.Rook,
             PieceType.Knight,
@@ -34,14 +35,14 @@ export class Board {
             PieceType.Bishop,
             PieceType.Knight,
             PieceType.Rook,
-        ];
-        for (let j = 0; j < 8; j++) {
+        ]
+        for (let col = 0; col < 8; col++) {
             // Set up white pieces.
-            this.grid[0][j].piece = makePiece(firstRow[j], Color.White);
-            this.grid[1][j].piece = makePiece(PieceType.Pawn, Color.White);
+            this.grid[0][col].piece = new Piece(firstRow[col], Color.White)
+            this.grid[1][col].piece = new Piece(PieceType.Pawn, Color.White)
             // Set up black pieces.
-            this.grid[6][j].piece = makePiece(firstRow[j], Color.Black);
-            this.grid[7][j].piece = makePiece(PieceType.Pawn, Color.Black);
+            this.grid[6][col].piece = new Piece(firstRow[col], Color.Black)
+            this.grid[7][col].piece = new Piece(PieceType.Pawn, Color.Black)
         }
     }
 }

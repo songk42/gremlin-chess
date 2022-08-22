@@ -1,6 +1,6 @@
 import React from "react";
 
-function NotFound(props) {
+function NotFound() {
     return (
         <div className="page-body">
             <h1>404 Not Found</h1>
